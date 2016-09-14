@@ -1,30 +1,25 @@
 import { LANGUAGES } from '../../components/language/language.constants';
+import {Deferred} from 'ngDeferred';
 
-<%=jhiPrefixCapitalized%>LanguageService.$inject = ['$q', '$http', '$translate', 'tmhDynamicLocale'];
+export class <%=jhiPrefixCapitalized%>LanguageService {
 
-export function <%=jhiPrefixCapitalized%>LanguageService ($q, $http, $translate, tmhDynamicLocale) {
-    var service = {
-        changeLanguage: changeLanguage,
-        getAll: getAll,
-        getCurrent: getCurrent
-    };
-
-    return service;
-
-    function changeLanguage(languageKey) {
-        $translate.use(languageKey);
-        tmhDynamicLocale.set(languageKey);
+    constructor (@Inject('$translate') private $translate, @Inject('tmhDynamicLocale') private tmhDynamicLocale) {
     }
 
-    function getAll () {
-        var deferred = $q.defer();
+    changeLanguage(languageKey) {
+        this.$translate.use(languageKey);
+        this.tmhDynamicLocale.set(languageKey);
+    }
+
+    public getAll () : Observable<any> {
+        var deferred = new Deferred();
         deferred.resolve(LANGUAGES);
         return deferred.promise;
     }
 
-    function getCurrent () {
-        var deferred = $q.defer();
-        var language = $translate.storage().get('NG_TRANSLATE_LANG_KEY');
+    getCurrent () {
+        var deferred = new Deferred();
+        var language = this.$translate.storage().get('NG_TRANSLATE_LANG_KEY');
 
         deferred.resolve(language);
 

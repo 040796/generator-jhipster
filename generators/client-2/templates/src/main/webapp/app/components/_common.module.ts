@@ -22,6 +22,8 @@ import { AlertService } from './alert/alert.service';
 import { PageRibbonComponent } from './profiles/page-ribbon.component';
 
 upgradeAdapter.upgradeNg1Provider('$state');
+upgradeAdapter.upgradeNg1Provider('$translate');
+upgradeAdapter.upgradeNg1Provider('tmhDynamicLocale');
 upgradeAdapter.upgradeNg1Provider('Auth');<% if (enableTranslation) { %>
 upgradeAdapter.upgradeNg1Provider('<%=jhiPrefixCapitalized%>LanguageService');<% } %>
 upgradeAdapter.upgradeNg1Provider('LoginService');
