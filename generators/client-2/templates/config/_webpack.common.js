@@ -67,7 +67,9 @@ module.exports = function (options) {
             name: ['polyfills', 'vendor'].reverse()
         }),
         new CopyWebpackPlugin([
-            { from: './src/main/webapp/content', to: 'content'}<% if (enableTranslation) { %>,
+            { from: './src/main/webapp/content', to: 'content'},
+            { from: './node_modules/swagger-ui/dist', to: '../../src/main/webapp/bower_components/swagger-ui/dist'}
+<% if (enableTranslation) { %>,
             { from: './src/main/webapp/i18n', to: 'i18n'}<% } %>
         ]),
         new webpack.ProvidePlugin({
