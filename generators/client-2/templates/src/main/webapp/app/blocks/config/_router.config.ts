@@ -13,6 +13,11 @@ export class <%=jhiPrefixCapitalized%>RouterConfig {
             vis.visualizer(router);
         }
 
+        router.urlRouterProvider.otherwise(function ($injector, $location) {
+            router.stateService.go('home');
+            return '/';
+        });
+
         router.urlMatcherFactory.type('boolean', {
             decode: function(val: string): boolean { return val === '1' || val === 'true'; },
             encode: function(val: boolean) { return val ? '1' : '0'; },

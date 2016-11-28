@@ -29,7 +29,6 @@ localStorageConfig();
 
 let routerConfig = {
     configClass: <%=jhiPrefixCapitalized%>RouterConfig,
-    otherwise: '/',
     useHash: true,
     states: [
         appState,
