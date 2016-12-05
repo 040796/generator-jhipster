@@ -58,7 +58,7 @@ import {
         <%=jhiPrefixCapitalized%>LanguageService,
         { provide: MissingTranslationHandler, useClass: <%=jhiPrefixCapitalized%>MissingTranslationHandler },
         <%_ } _%>
-        alertServiceProvider(),
+        alertServiceProvider,
         PaginationUtil,
         ParseLinks,
         DataUtils,

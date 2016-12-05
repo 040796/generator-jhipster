@@ -4,6 +4,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StringReplacePlugin = require('string-replace-webpack-plugin');
+const NgTools = require('@ngtools/webpack');
+
 module.exports = function (options) {
     const DATAS = {
         VERSION: JSON.stringify(require("../package.json").version),
@@ -48,7 +50,8 @@ module.exports = function (options) {
             test: /\.ts$/,
             loaders: [
                 'angular2-template-loader',
-                'awesome-typescript-loader'
+                'awesome-typescript-loader',
+                '@ngtools/webpack'
             ],
             exclude: ['node_modules/generator-jhipster']
         },
@@ -100,6 +103,10 @@ module.exports = function (options) {
             inject: 'body',
             data: DATAS
         }),
-        new StringReplacePlugin()
+        new StringReplacePlugin(),
+        new NgTools.AotPlugin({
+            tsConfigPath: 'tsconfig.json',
+            entryModule: './src/main/webapp/app/app.module#AppModule'
+        })
     ]};
 };
